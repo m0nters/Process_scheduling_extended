@@ -36,7 +36,7 @@ but here are some new algorithm implementations:
           | 2   | 1            | 5         | 2        |
           | 3   | 2            | 3         | 1        |
           
-          (Remember: the smaller  the `priority_level`, the higher the priority of the process)
+          (Remember: the smaller  the `priority_level`, the higher the priority of the process, in this example P1 < P2 < P3)
 
        -  Output:
             ```
