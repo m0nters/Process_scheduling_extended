@@ -1,4 +1,5 @@
 #include "Header.h"
+#include <unordered_set>
 
 // these 2 are implemented starvation prevention methods
 
@@ -21,10 +22,12 @@ void Priority_nonpreemtive(vector<Process>& processes, const int& upgrade_time, 
 
 	int processes_added_to_CPU_queue_count = 0; // optimization: avoid abundant check to add into ready queue, reduce O(n)
 	while (finished_processes_num != processes.size()) {
-		// maximum time complexity: O(n)
+		// maximum time complexity: O(n) where n is all the process in the ready queue
 		for (auto& process : upgrade_priroty_time_map) // checking whether there is any process staying in the ready queue for too long that needs to be upgraded priroty RIGHT NOW
-			if (process.second == time)
+			if (process.second == time) {
 				++process.first->priority_attributes.priority_level;
+				upgrade_priroty_time_map[process.first] = time + upgrade_time; // update the time for next priority upgrade
+			}
 
 		for (int i = processes_added_to_CPU_queue_count; i < processes.size(); i++) {
 			if (processes[i].arrival_time == time) {
@@ -120,8 +123,10 @@ void Priority_preemtive(vector<Process>& processes, const int& upgrade_time, ost
 	int processes_added_to_CPU_queue_count = 0; // optimization: avoid abundant check to add into ready queue, reduce O(n)
 	while (finished_processes_num != processes.size()) {
 		for (auto& process : upgrade_priroty_time_map) // checking whether there is any process staying in the ready queue for too long that needs to be upgraded priroty RIGHT NOW
-			if (process.second == time)
+			if (process.second == time) {
 				++process.first->priority_attributes.priority_level;
+				upgrade_priroty_time_map[process.first] = time + upgrade_time; // update the time for the next priority upgrade
+			}
 
 		for (int i = processes_added_to_CPU_queue_count; i < processes.size(); i++) {
 			if (processes[i].arrival_time == time) {
