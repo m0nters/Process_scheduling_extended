@@ -134,7 +134,7 @@ void Priority_preemtive(vector<Process>& processes, const int& upgrade_time, ost
 				break;
 		}
 
-		// if there's a (newer) process with smaller or equal cpu `priority_level` than the current process at the moment
+		// if there's a (newer) process with smaller or equal `priority_level` than the current process at the moment
 		if (current_CPU_used_process && !CPU_queue.empty() && CPU_queue.top()->priority_attributes.priority_level <= current_CPU_used_process->priority_attributes.priority_level) {
 
 			// IMMEDIATELY terminate the current process by pushing it into queue
