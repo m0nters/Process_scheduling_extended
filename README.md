@@ -1,5 +1,5 @@
 # Process-scheduling-extended
-Inspired from my school project but I want to expand this to other scheduling algorithms (inherits code from my school project)
+Inspired by my school project, I aim to expand this to include other scheduling algorithms, building upon the existing code inherited from my school project.
 
 This work may be updated periodically.
 ## Work
@@ -7,7 +7,7 @@ Almost everything is the same like instructions shown in the related project [he
 but here are some new algorithm implementations:
 - Priroity Scheduling (non-preemtive and preemtive version) with starvation prevent method
 
-	- The first line: an integer =representing the scheduling algorithm -- Their algorithm numbers are 5 and 6 respectively.
+	- The first line: an integer =representing the scheduling algorithm — Their algorithm numbers are 5 and 6 respectively.
 	- The second line is a positive integer representing the waiting time for processes in the ready queue that have not yet been scheduled to increase their `priority_level`.
 	-  The next line: a positive integer N representing the number of processes to be scheduled, up to a maximum of 4 processes. 
 	- The following N lines: each line describes the scheduling information of a process with the syntax:
