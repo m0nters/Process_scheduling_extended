@@ -53,9 +53,7 @@ void SRTN(vector<Process>& processes, ostream& os) {
 
 		// draw the CPU gantt chart
 		if (current_CPU_used_process) { // if there's a process running in CPU
-			int index = current_CPU_used_process->id - 1;
 			CPU_chart.push_back(to_string(current_CPU_used_process->id));
-
 			if (!--current_CPU_used_process->CPU_burst_time.front()) {
 				current_CPU_used_process->CPU_burst_time.pop();
 				current_CPU_used_process->priority_attributes.last_time_get_out_CPU = time + 1;
@@ -65,7 +63,6 @@ void SRTN(vector<Process>& processes, ostream& os) {
 					++finished_processes_num;
 					current_CPU_used_process->turn_around_time = time - current_CPU_used_process->arrival_time + 1;
 				}
-
 				current_CPU_used_process = NULL;
 			}
 		}
@@ -76,7 +73,6 @@ void SRTN(vector<Process>& processes, ostream& os) {
 		// FCFS ALWAYS!
 		if (current_R_used_process) { // if there's a process running in R
 			R_chart.push_back(to_string(current_R_used_process->id));
-
 			if (!--current_R_used_process->resource_usage_time.front()) {
 				current_R_used_process->resource_usage_time.pop();
 				current_R_used_process->priority_attributes.last_time_push_in_CPU_queue = time + 1; // for example time is 7 but IN FACT the time the process get out of the R_queue is 8! since we are considering time as BLOCKS!
@@ -86,7 +82,6 @@ void SRTN(vector<Process>& processes, ostream& os) {
 					++finished_processes_num;
 					current_R_used_process->turn_around_time = time - current_R_used_process->arrival_time + 1;
 				}
-
 				current_R_used_process = NULL;
 			}
 		}

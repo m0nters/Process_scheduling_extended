@@ -1,9 +1,8 @@
 #include "Header.h"
-#include <unordered_set>
 
 // these 2 are implemented starvation prevention methods
 
-void Priority_nonpreemtive(vector<Process>& processes, const int& upgrade_time, ostream& os) {
+void Priority_NP(vector<Process>& processes, const int& upgrade_time, ostream& os) {
 	int time = 0;
 
 	// gantt chart for the result
@@ -56,9 +55,7 @@ void Priority_nonpreemtive(vector<Process>& processes, const int& upgrade_time, 
 
 		// draw the CPU gantt chart
 		if (current_CPU_used_process) { // if there's a process running in CPU
-			int index = current_CPU_used_process->id - 1;
 			CPU_chart.push_back(to_string(current_CPU_used_process->id));
-
 			if (!--current_CPU_used_process->CPU_burst_time.front()) {
 				current_CPU_used_process->CPU_burst_time.pop();
 				current_CPU_used_process->priority_attributes.last_time_get_out_CPU = time + 1;
@@ -68,7 +65,6 @@ void Priority_nonpreemtive(vector<Process>& processes, const int& upgrade_time, 
 					++finished_processes_num;
 					current_CPU_used_process->turn_around_time = time - current_CPU_used_process->arrival_time + 1;
 				}
-
 				current_CPU_used_process = NULL;
 			}
 		}
@@ -91,7 +87,6 @@ void Priority_nonpreemtive(vector<Process>& processes, const int& upgrade_time, 
 					++finished_processes_num;
 					current_R_used_process->turn_around_time = time - current_R_used_process->arrival_time + 1;
 				}
-
 				current_R_used_process = NULL;
 			}
 		}
@@ -103,7 +98,7 @@ void Priority_nonpreemtive(vector<Process>& processes, const int& upgrade_time, 
 	writeFile(os, processes, CPU_chart, R_chart);
 }
 
-void Priority_preemtive(vector<Process>& processes, const int& upgrade_time, ostream& os) {
+void Priority_P(vector<Process>& processes, const int& upgrade_time, ostream& os) {
 	int time = 0;
 
 	// gantt chart for the result
@@ -166,7 +161,6 @@ void Priority_preemtive(vector<Process>& processes, const int& upgrade_time, ost
 
 		// draw the CPU gantt chart
 		if (current_CPU_used_process) { // if there's a process running in CPU
-			int index = current_CPU_used_process->id - 1;
 			CPU_chart.push_back(to_string(current_CPU_used_process->id));
 
 			if (!--current_CPU_used_process->CPU_burst_time.front()) {
@@ -178,7 +172,6 @@ void Priority_preemtive(vector<Process>& processes, const int& upgrade_time, ost
 					++finished_processes_num;
 					current_CPU_used_process->turn_around_time = time - current_CPU_used_process->arrival_time + 1;
 				}
-
 				current_CPU_used_process = NULL;
 			}
 		}
@@ -201,7 +194,6 @@ void Priority_preemtive(vector<Process>& processes, const int& upgrade_time, ost
 					++finished_processes_num;
 					current_R_used_process->turn_around_time = time - current_R_used_process->arrival_time + 1;
 				}
-
 				current_R_used_process = NULL;
 			}
 		}

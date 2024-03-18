@@ -1,16 +1,18 @@
 #include "Header.h"
+#include <numeric>
+#include <iomanip>
 
 void readFile(istream& is, int& algorithm_type, int& num_of_process, vector <Process>& processes, int& quantum, int& upgrade_time) {
 	is >> algorithm_type;
 
 	switch (algorithm_type)
 	{
-	case 2: // Round Robin
+	case ROUND_ROBIN:
 		is >> quantum;
 		break;
-	case 5: // Priority non-preemptive
-	case 6: // Priority preemptive
-		is >> upgrade_time;
+	case PRIROITY_NONPREEMPTIVE:
+	case PRIORITY_PREEMPTIVE:
+		is >> upgrade_time; // starvation prevention
 		break;
 	default:
 		break;
@@ -28,7 +30,7 @@ void readFile(istream& is, int& algorithm_type, int& num_of_process, vector <Pro
 		string line;
 		getline(is, line);
 		stringstream ss(line);
-		if (algorithm_type == 5 || algorithm_type == 6) // Priority non-preemptive or preemptive (priority scheduling algorithm)
+		if (algorithm_type == PRIROITY_NONPREEMPTIVE || algorithm_type == PRIORITY_PREEMPTIVE) // Priority non-preemptive or preemptive (priority scheduling algorithm)
 			ss >> p.priority_attributes.priority_level;
 		ss >> p.arrival_time;
 		int cnt = 0, num;
@@ -64,11 +66,21 @@ void writeFile(ostream& os, vector<Process>& processes, vector<string>& CPU_char
 	sort(processes.begin(), processes.end(), [](Process a, Process b) {
 		return a.id < b.id;
 		});
-	for (auto& it : processes)
+
+	float AVG_TT = 0, AVG_WT = 0;
+	for (auto& it : processes) {
 		os << it.turn_around_time << " ";
+		AVG_TT += it.turn_around_time;
+	}
 	os << "\n";
-	for (auto& it : processes)
+	for (auto& it : processes) {
 		os << it.waiting_time << " ";
+		AVG_WT += it.waiting_time;
+	}
 	os << "\n";
 
+	AVG_TT /= processes.size();
+	AVG_WT /= processes.size();
+	os << "AVG TT = " << setprecision(2) << fixed << AVG_TT << "\n";
+	os << "AVG WT = " << setprecision(2) << fixed << AVG_WT << "\n";
 }
