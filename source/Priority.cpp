@@ -24,7 +24,7 @@ void Priority_NP(vector<Process>& processes, const int& upgrade_time, ostream& o
 		// maximum time complexity: O(n) where n is all the process in the ready queue
 		for (auto& process : upgrade_priroty_time_map) // checking whether there is any process staying in the ready queue for too long that needs to be upgraded priroty RIGHT NOW
 			if (process.second == time) {
-				++process.first->priority_attributes.priority_level;
+				--process.first->priority_attributes.priority_level;
 				upgrade_priroty_time_map[process.first] = time + upgrade_time; // update the time for next priority upgrade
 			}
 
@@ -119,7 +119,7 @@ void Priority_P(vector<Process>& processes, const int& upgrade_time, ostream& os
 	while (finished_processes_num != processes.size()) {
 		for (auto& process : upgrade_priroty_time_map) // checking whether there is any process staying in the ready queue for too long that needs to be upgraded priroty RIGHT NOW
 			if (process.second == time) {
-				++process.first->priority_attributes.priority_level;
+				--process.first->priority_attributes.priority_level;
 				upgrade_priroty_time_map[process.first] = time + upgrade_time; // update the time for the next priority upgrade
 			}
 
