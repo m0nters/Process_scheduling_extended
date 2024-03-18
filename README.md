@@ -5,7 +5,7 @@ This work may be updated periodically.
 ## Work
 Almost everything is the same like instructions shown in the related project [here][ref1],
 but here are some new algorithm implementations:
-- Priroity Scheduling (non-preemtive and preemtive version) with starvation prevent method (increase `priroity_level` over time if the process is still in `CPU_queue`)
+- Priroity Scheduling (non-preemtive and preemtive version) (the smaller the `priority_level`, the higher the priority of the process) with starvation prevent method (reduce `priroity_level` over time if the process is still in `CPU_queue`)
 
 	- The first line: an integer representing the scheduling algorithm — Their algorithm numbers are 5 and 6 respectively.
 	- The second line is a positive integer representing the waiting time for processes in the ready queue that have not yet been scheduled to increase their `priority_level`.
@@ -13,8 +13,9 @@ but here are some new algorithm implementations:
 	- The following N lines: each line describes the scheduling information of a process with the syntax:
   
         `<priroity_level>` `<Arrival time in Ready Queue>` [`<CPU Burst Time>` `<Resource Usage Time>`]
-        
-      (the smaller  the `priority_level`, the higher the priority of the process)
+   
+        (the smaller the `priority_level`, the higher the priority of the process)
+      (the smaller the `priority_level`, the higher the priority of the process)
   	-  (From here onwards, it follows the same format and condition as the [previous project][ref1] for both input and output)...
 	
 	 	For example:
